@@ -59,9 +59,9 @@ Performance:
 
   Elapsed inverse rsqrt() stdlib: 0.065589 seconds 
 
-  Elapsed q_sqrt() Quake III approximation: 0.020726 seconds, speedup: x3.165 
+  Elapsed inv q_rsqrt() Quake III approximation: 0.020726 seconds, speedup: x3.165 
 
-  Elapsed q_sqrt_v2_more_precise() approximation: 0.022856 seconds, speedup: x2.870 
+  Elapsed inv q_rsqrt_v2_more_precise() approximation: 0.022856 seconds, speedup: x2.870 
 
   Total_sum_value: -nan IGNORE
 

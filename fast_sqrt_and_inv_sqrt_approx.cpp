@@ -64,9 +64,9 @@ Performance:
 
   Elapsed inverse rsqrt() stdlib: 0.065589 seconds 
 
-  Elapsed q_sqrt() Quake III approximation: 0.020726 seconds, speedup: x3.165 
+  Elapsed inv q_rsqrt() Quake III approximation: 0.020726 seconds, speedup: x3.165 
 
-  Elapsed q_sqrt_v2_more_precise() approximation: 0.022856 seconds, speedup: x2.870 
+  Elapsed inv q_rsqrt_v2_more_precise() approximation: 0.022856 seconds, speedup: x2.870 
 
   Total_sum_value: -nan IGNORE
 
@@ -326,7 +326,7 @@ void test_performance_speed_methods(void) {
 
     toc_2 = clock();
     double time_4 = (double)(toc_2 - tic_1) / CLOCKS_PER_SEC;
-    printf("\n  Elapsed q_sqrt() Quake III approximation: %f seconds, speedup: x%.3f \n", time_4, time_3 / time_4);
+    printf("\n  Elapsed inv q_rsqrt() Quake III approximation: %f seconds, speedup: x%.3f \n", time_4, time_3 / time_4);
     
 
     // Test q_rsqrt_v2_more_precise(float) approximation.
@@ -351,7 +351,7 @@ void test_performance_speed_methods(void) {
 
     toc_2 = clock();
     double time_5 = (double)(toc_2 - tic_1) / CLOCKS_PER_SEC;
-    printf("\n  Elapsed q_sqrt_v2_more_precise() approximation: %f seconds, speedup: x%.3f \n", time_5, time_3 / time_5);
+    printf("\n  Elapsed inv q_rsqrt_v2_more_precise() approximation: %f seconds, speedup: x%.3f \n", time_5, time_3 / time_5);
     
     printf("\n  Total_sum_value: %f IGNORE\n", total);
 }
