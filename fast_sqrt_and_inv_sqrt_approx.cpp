@@ -102,22 +102,22 @@ Error calculated with random values....
 /* Assumes that float is in the IEEE 754 single precision floating point format */
 float sqrt_approx(float z)
 {
-	union { float f; uint32_t i; } val = {z};	/* Convert type, preserving bit pattern */
-	/*
-	 * To justify the following code, prove that
-	 *
-	 * ((((val.i / 2^m) - b) / 2) + b) * 2^m = ((val.i - 2^m) / 2) + ((b + 1) / 2) * 2^m)
-	 *
-	 * where
-	 *
-	 * b = exponent bias
-	 * m = number of mantissa bits
-	 */
-	val.i -= 1 << 23;	/* Subtract 2^m. */
-	val.i >>= 1;		/* Divide by 2. */
-	val.i += 1 << 29;	/* Add ((b + 1) / 2) * 2^m. */
+    union { float f; uint32_t i; } val = {z};	/* Convert type, preserving bit pattern */
+    /*
+     * To justify the following code, prove that
+     *
+     * ((((val.i / 2^m) - b) / 2) + b) * 2^m = ((val.i - 2^m) / 2) + ((b + 1) / 2) * 2^m)
+     *
+     * where
+     *
+     * b = exponent bias
+     * m = number of mantissa bits
+     */
+    val.i -= 1 << 23;	/* Subtract 2^m. */
+    val.i >>= 1;		/* Divide by 2. */
+    val.i += 1 << 29;	/* Add ((b + 1) / 2) * 2^m. */
     val.i += -0x4b0d2;  // Adjustment to lower the maximum absolute error from ~6 % (measured 6.066 %) to ~3.5 % ( measured 3.474 %) .
-	return val.f;		/* Interpret again as float */
+    return val.f;		/* Interpret again as float */
 }
 
 // Wikipedia - Fast inverse square root
@@ -125,13 +125,13 @@ float sqrt_approx(float z)
 // https://en.wikipedia.org/wiki/Fast_inverse_square_root
 float q_rsqrt(float number)
 {
-	union {
-		float    f;
-		uint32_t i;
-	} conv = { .f = number };
-	conv.i  = 0x5f3759df - (conv.i >> 1);
-	conv.f *= 1.5F - (number * 0.5F * conv.f * conv.f);
-	return conv.f;
+    union {
+        float    f;
+        uint32_t i;
+    } conv = { .f = number };
+    conv.i  = 0x5f3759df - (conv.i >> 1);
+    conv.f *= 1.5F - (number * 0.5F * conv.f * conv.f);
+    return conv.f;
 }
 
 // Wikipedia - Fast inverse square root
@@ -143,13 +143,13 @@ float q_rsqrt(float number)
 // https://en.wikipedia.org/wiki/Fast_inverse_square_root
 float q_rsqrt_v2_more_precise(float number)
 {
-	union {
-		float    f;
-		uint32_t i;
-	} conv = { .f = number };
+    union {
+        float    f;
+        uint32_t i;
+    } conv = { .f = number };
     conv.i = 0x5F1FFFF9 - ( conv.i >> 1 );
-	conv.f *= 0.703952253f * ( 2.38924456f - number * conv.f * conv.f );
-	return conv.f;
+    conv.f *= 0.703952253f * ( 2.38924456f - number * conv.f * conv.f );
+    return conv.f;
 }
 
 double diff_error_signed(float a_precise, float b_aprox) {
